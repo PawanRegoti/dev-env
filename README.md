@@ -28,7 +28,7 @@ Let's start,
 
 * You can start specific services by `./up <service-name1> <service-name2>` (if you are using ComEmu or Cmder you can run it as `sh up <service-name1> <service-name2>`)
 
-* For eg: `./up mssql mongo` runs international ledgers and inventory app
+* For eg: `./up mssql mongo` runs ms sql and mongo db
 
 * You can see the status of your container in dashboard of docker desktop. If you are using WSL, Linux or Mac you can use `ctop` (https://ctop.sh/) to have comprehensive information of your containers.
 
@@ -37,7 +37,7 @@ Let's start,
 
 * You can stop specific services by `./stop <service-name1> <service-name2>`
 
-* For eg: `./stop mssql mongo` stop international ledgers and inventory app
+* For eg: `./stop mssql mongo` stop ms sql and mongo db
 
 
 ### Delete the docker cluster using `./down` bash command.
@@ -49,5 +49,5 @@ Let's start,
 
 * You can see logs of specific services by `./logs <service-name1> <service-name2>`
 
-* For eg: `./logs mssql mongo` shows logs of international ledgers and inventory app
+* For eg: `./logs mssql mongo` shows logs of ms sql and mongo db
 
