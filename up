@@ -1,0 +1,7 @@
+#!/bin/bash
+
+images=`./images`
+
+docker-compose $images pull $@
+
+docker-compose $images up --remove-orphans --build -d $@

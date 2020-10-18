@@ -1,0 +1,5 @@
+#!/bin/bash
+
+images=`./images`
+
+docker-compose $images down $@

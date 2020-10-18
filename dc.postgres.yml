@@ -1,0 +1,18 @@
+version: '2.1'
+
+services:
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    restart: always
+    volumes:
+      - ./docker-data/pg:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 20

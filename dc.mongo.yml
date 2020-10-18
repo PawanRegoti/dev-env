@@ -1,0 +1,16 @@
+version: '2.1'
+
+services:
+  mongo:
+    image: mongo:4.2-bionic
+    container_name: mongo
+    restart: always
+    ports:
+      - ${MONGODB_PORT:-27017}:27017
+    volumes:
+      - ./docker-data/mongo:/data/db
+    healthcheck:
+      test: ['CMD-SHELL', 'echo', "'db.runCommand({ping:1}).ok'", '|', 'mongo localhost:27017 --quiet']
+      interval: 10s
+      timeout: 5s
+      retries: 20

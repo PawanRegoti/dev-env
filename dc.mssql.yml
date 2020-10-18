@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU2-ubuntu-16.04
+    container_name: mssql
+    user: root
+    volumes:
+      - ./docker-data/mssql:/var/opt/mssql/data
+    environment:
+      "ACCEPT_EULA": "Y"
+      "SA_PASSWORD": "${MSSQL_PASSWORD}"
+    ports:
+      - ${MSSQL_PORT:-1433}:1433
+    healthcheck:
+      test: ['CMD', '/opt/mssql-tools/bin/sqlcmd', '-U', 'sa', '-P', '${MSSQL_PASSWORD}', '-Q', 'select 1']
+      interval: 10s
+      timeout: 10s
+      retries: 20

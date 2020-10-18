@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# adding infrastucture containers
+echo -f dc.adminer.yml
+
+# adding micro services as defined in .env file with parameter DC_BUILD
+DC_BUILD_ENV=$(cat .env | grep DC_BUILD= | sed 's/ //g' | cut -d = -f2)
+IFS=',' read -ra DC_BUILDS <<< $DC_BUILD_ENV
+
+for DC_BUILD in "${DC_BUILDS[@]}"; do
+  echo -f dc.$DC_BUILD.yml
+done
