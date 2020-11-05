@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  mssql-tiny:
+    #image: mcr.microsoft.com/mssql/server:2019-CU2-ubuntu-16.04
+    build:
+      context: ./mssql-tiny
+    container_name: mssql-tiny
+    user: root
+    volumes:
+      - ./docker-data/mssql-tiny:/var/opt/mssql/data
+    environment:
+      "ACCEPT_EULA": "Y"
+      "MSSQL_MEMORY_LIMIT_MB": 250
+      "SA_PASSWORD": "${MSSQL_PASSWORD}"
+    mem_limit: 250m
+    ports:
+      - ${MSSQL_PORT:-1433}:1433
+    healthcheck:
+      test: ['CMD', '/opt/mssql-tools/bin/sqlcmd', '-U', 'sa', '-P', '${MSSQL_PASSWORD}', '-Q', 'select 1']
+      interval: 10s
+      timeout: 10s
+      retries: 20
