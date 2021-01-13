@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+  db-tools:
+    build:
+      context: ./db-tools
+    container_name: db-tools
+    working_dir: /usr/src/app/
+    volumes:
+      - ./docker-data/db-tools/exports:/usr/src/app/exports:delegated
+      - ./docker-data/db-tools/imports:/usr/src/app/imports:delegated
+    environment:
+      POSTGRES_CONNECTION_STRINGS: ${POSTGRES_CONNECTION_STRINGS}
+      MONGODB_CONNECTION_STRINGS: ${MONGODB_CONNECTION_STRINGS}
+      MSSQL_CONNECTION_STRINGS: ${MSSQL_CONNECTION_STRINGS}
+      AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME:-dev-databases}
+      AZURE_STORAGE_KEY: $AZURE_STORAGE_KEY
+      AZURE_STORAGE_ACCOUNT: $AZURE_STORAGE_ACCOUNT
+      AZURE_STORAGE_CONNECTION_STRING: $AZURE_STORAGE_CONNECTION_STRING
+      CORE_APP_REMOTE_SOURCE_CONNECTION_STRING: $CORE_APP_REMOTE_SOURCE_CONNECTION_STRING
+      CORE_APP_INIT_DEV_SOURCE_CONNECTION_STRING: ${CORE_APP_INIT_DEV_SOURCE_CONNECTION_STRING:-server=tcp:reviso-public-test.database.windows.net,1433;database=initdb_2020-11-15;uid=reviso-public-test@reviso-public-test;pwd=GT02T3cavckqZlW0}
+      CORE_APP_CONNECTION_STRING: ${CORE_APP_CONNECTION_STRING:-server=mssql;database=core-app;uid=sa;pwd=StrongPassw0rd}

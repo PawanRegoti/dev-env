@@ -30,6 +30,10 @@ Let's start,
 
 * For eg: `./up mssql mongo` runs ms sql and mongo db
 
+* if, `./up` fails with `#!/bin/bash no such file or directory` run following command:
+
+  * `sed -i '1s/^.*#/#/;s/\r$//' brokenScript` (why? [read this](https://unix.stackexchange.com/questions/27054/bin-bash-no-such-file-or-directory))
+
 * You can see the status of your container in dashboard of docker desktop. If you are using WSL, Linux or Mac you can use `ctop` (https://ctop.sh/) to have comprehensive information of your containers.
 
 
